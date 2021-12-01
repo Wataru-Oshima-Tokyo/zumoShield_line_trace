@@ -59,7 +59,7 @@
       <!-- We are running at 90fps to reduce motion blur -->
       <param name="framerate" value="90"/>
     </node>
-    <node>
+    <node
         name="ldlidarNode"          
         pkg="ldlidar"  
         type="ldlidar" 
