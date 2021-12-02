@@ -9,29 +9,30 @@ import numpy as np
 from geometry_msgs.msg import Twist
 
 """
-M : 与える操作量
-M1 : 一つ前に与えた操作量
-e : 偏差(目的値と現在値の差)
-e1 : 前回の偏差
-e2 : 前々回の偏差
-Kp : 比例制御（P制御)の比例定数
-Ki : 積分制御（I制御)の比例定数
-Kd : 微分制御（D制御)の比例定数
+#M : 与える操作量
+#M1 : 一つ前に与えた操作量
+#e : 偏差(目的値と現在値の差)
+#e1 : 前回の偏差
+#e2 : 前々回の偏差
+#Kp : 比例制御（P制御)の比例定数
+#Ki : 積分制御（I制御)の比例定数
+#Kd : 微分制御（D制御)の比例定数
 """
 
-global M = 0.00 
-global M1 =  0.00   
-global e = 0.00 
-global e1 = 0.00 
-global e2 = 0.00 
-global Kp = 0.1 
-global Ki = 0.1 
-global Kd = 0.1 
+
 
 class Follower:
 	def __init__(self):
 		print("__init__")
 		self.bridge = cv_bridge.CvBridge()
+        self.M = 0.00 
+        self.M1 =  0.00   
+        self.e = 0.00 
+        self.e1 = 0.00 
+        self.e2 = 0.00 
+        self.Kp = 0.1 
+        self.Ki = 0.1 
+        self.Kd = 0.1 
 #		cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成
 #		cv.namedWindow('MASK', 1)   #'MASK'という名前の画像表示のウィンドウを作成
 #		cv.namedWindow('MASKED', 1) #'MASK'という名前の画像表示のウィンドウを作成
@@ -56,10 +57,10 @@ class Follower:
 		mask[0:search_top, 0:w] = 0
 		mask[search_bot:h, 0:w] = 0
 
-		M = cv.moments(mask)    #maskにおける1の部分の重心
+		self.M = cv.moments(mask)    #maskにおける1の部分の重心
 		if M['m00'] > 0:    #重心が存在する
-			cx = int(M['m10']/M['m00']) #重心のx座標
-			cy = int(M['m01']/M['m00']) #重心のy座標
+			cx = int(self.M['m10']/self.M['m00']) #重心のx座標
+			cy = int(self.M['m01']/self.M['m00']) #重心のy座標
 			cv.circle(image, (cx, cy), 20, (0, 0, 255), -1) #赤丸を画像に描画
 
 		err = cx - w//2 #黄色の先の重心座標(x)と画像の中心(x)との差
@@ -88,12 +89,12 @@ class Follower:
 		self.twist.linear.x = 0.002
 		global M, M1, e,e1,e2
 			for i in range(t):
-			M1 = M
-			e2 = e1
-			e1 = e
-			M =  M1 + Kp * (e-e1) + Ki * e + Kd * ((e-e1) - (e1-e2))
+			self.M1 = self.M
+			self.e2 = self.e1
+			self.e1 = e
+			self.M =  self.M1 + self.Kp * (self.e-self.e1) + self.Ki * self.e + self.Kd * ((self.e-self.e1) - (self.e1-self.e2))
 
-			self.twist.linear.z = M
+			self.twist.linear.z = self.M
 			self.cmd_vel_pub.publish(self.twist)
 		
 #Unnecessary but it will be  used in the future--------------
