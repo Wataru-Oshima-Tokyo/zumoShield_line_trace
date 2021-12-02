@@ -89,10 +89,10 @@ class Follower:
 		t = 100
 		self.twist.linear.x = 0.002
 		for i in range(t):
-		self.M1 = self.M
-		self.e2 = self.e1
-		self.e1 = e
-		self.M =  self.M1 + self.Kp * (self.e-self.e1) + self.Ki * self.e + self.Kd * ((self.e-self.e1) - (self.e1-self.e2))
+			self.M1 = self.M
+			self.e2 = self.e1
+			self.e1 = e
+			self.M =  self.M1 + self.Kp * (self.e-self.e1) + self.Ki * self.e + self.Kd * ((self.e-self.e1) - (self.e1-self.e2))
 
 			self.twist.linear.z = self.M
 			self.cmd_vel_pub.publish(self.twist)
