@@ -10,6 +10,13 @@ project(zumoShield_line_trace)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
+  std_msgs
+  message_generation
+  geometry_msgs
+  sensor_msgs
+  nav_msgs
+  tf
+  rosserial_python
 )
 
 ## System dependencies are found with CMake's conventions
