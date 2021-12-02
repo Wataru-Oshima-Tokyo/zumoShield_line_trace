@@ -65,6 +65,8 @@
         type="ldlidar" 
         args="LD06"
         output="screen">
+        <param name="serial_port"         type="string"   value="/dev/ttyS0"/>
+        <param name="lidar_frame"         type="string"   value="laser"/>  
     </node>
     
     <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 map odom"/>
