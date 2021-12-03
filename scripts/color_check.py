@@ -24,7 +24,7 @@ class Follower:
 		cv.namedWindow('hsv')
 		cv.setMouseCallback('hsv', self.mouseEvent)
 		# now click into the hsv img , and look at values:
-		image_hsv= cv.cvtColor(image_src,cv.COLOR_BGR2HSV)
+		image_hsv= cv.cvtColor(hsv,cv.COLOR_BGR2HSV)
 		cv.imshow("hsv",image_hsv)
 		cv.waitKey(0)   #3秒待つ
 		
