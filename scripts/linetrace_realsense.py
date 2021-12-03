@@ -60,10 +60,10 @@ class Follower:
 		mask[0:search_top, 0:w] = 0
 		mask[search_bot:h, 0:w] = 0
 
-		cg = cv.moments(mask)    #maskにおける1の部分の重心
+		self.M = cv.moments(mask)    #maskにおける1の部分の重心
 		if cg['m00'] > 0:    #重心が存在する
-			self.cx = int(cg['m10']/cg['m00']) #重心のx座標
-			self.cy = int(cg['m01']/cg['m00']) #重心のy座標
+			self.cx = int(self.M['m10']/self.M['m00']) #重心のx座標
+			self.cy = int(self.M['m01']/self.M['m00']) #重心のy座標
 			cv.circle(image, (self.cx, self.cy), 20, (0, 0, 255), -1) #赤丸を画像に描画
 
 		err = self.cx - w//2 #黄色の先の重心座標(x)と画像の中心(x)との差
@@ -88,8 +88,9 @@ class Follower:
 
 
 	def PIDcontrol(self, goal):
+		rospy.loginfo(str(self.M))
 		t = 100
-		self.twist.linear.x = 0.2
+		self.twist.linear.x = 0.05
 		for i in range(t):
 			self.M1 = self.M
 			self.e2 = self.e1
