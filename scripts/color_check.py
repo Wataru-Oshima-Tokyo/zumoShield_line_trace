@@ -20,18 +20,17 @@ class Follower:
 	def image_callback(self, msg):
 		#print("I will write down codes below")
 		image = self.bridge.imgmsg_to_cv2(msg, desired_encoding = 'bgr8')
-		hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV)  #色空間の変換(BGR→HSV)
+		self.hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV)  #色空間の変換(BGR→HSV)
 		cv.namedWindow('hsv')
 		cv.setMouseCallback('hsv', self.mouseEvent)
 		# now click into the hsv img , and look at values:
-		cv.imshow("hsv",hsv)
-		cv.waitKey(0) 
+		cv.imshow("hsv",self.hsv)
 		
 #Unnecessary but it will be  used in the future--------------
 
 	def mouseEvent(self,event,x,y,flags,param):
 		if event == cv.EVENT_LBUTTONUP:
-			pixel= image_hsv[y,x]
+			pixel= self.hsv[y,x]
 			#you might want to adjust the ranges(+-10, etc):
 			upper=  np.array([pixel[0] + 10, pixel[1] + 10, pixel[2] + 40])
 			lower=  np.array([pixel[0] -10, pixel[1] -10, pixel[2] -40])
