@@ -35,6 +35,7 @@ class Follower:
 		self.Kd = 0.1
 		self.cx =0
 		self.cy = 0
+		self.first = True
                 cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成
                 cv.namedWindow('MASK', 1)   #'MASK'という名前の画像表示のウィンドウを作成
                 cv.namedWindow('MASKED', 1) #'MASK'という名前の画像表示のウィンドウを作成
@@ -60,15 +61,17 @@ class Follower:
 		mask[0:search_top, 0:w] = 0
 		mask[search_bot:h, 0:w] = 0
 
-		self.M = cv.moments(mask)    #maskにおける1の部分の重心
-		if self.M['m00'] > 0:    #重心が存在する
-			self.cx = int(self.M['m10']/self.M['m00']) #重心のx座標
-			self.cy = int(self.M['m01']/self.M['m00']) #重心のy座標
+		cg = cv.moments(mask)    #maskにおける1の部分の重心
+		if cg['m00'] > 0:    #重心が存在する
+			self.cx = int(cg['m10']/cg['m00']) #重心のx座標
+			self.cy = int(cg['m01']/cg['m00']) #重心のy座標
 			cv.circle(image, (self.cx, self.cy), 20, (0, 0, 255), -1) #赤丸を画像に描画
 
 		err = self.cx - w//2 #黄色の先の重心座標(x)と画像の中心(x)との差
 # 		self.twist.linear.x = 0.2
-# 		self.twist.angular.z = -float(err)/2000 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
+		if(self.first):
+ 			self.M = -float(err)/2000 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
+			self.first = False
 # 		self.cmd_vel_pub.publish(self.twist)
 		self.PIDcontrol(err)
 
