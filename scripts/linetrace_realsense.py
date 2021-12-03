@@ -89,7 +89,7 @@ class Follower:
 
 	def PIDcontrol(self, goal):
 		t = 100
-		self.twist.linear.x = 0.2
+		self.twist.linear.x = 0.02
 		for i in range(t):
 			self.M1 = self.M
 			self.e2 = self.e1
@@ -99,7 +99,7 @@ class Follower:
 			
 # 			rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
 			self.twist.angular.z = self.M
-#			self.cmd_vel_pub.publish(self.twist)
+			self.cmd_vel_pub.publish(self.twist)
 		
 #Unnecessary but it will be  used in the future--------------
 
