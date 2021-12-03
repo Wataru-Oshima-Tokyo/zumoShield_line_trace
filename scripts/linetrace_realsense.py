@@ -35,9 +35,9 @@ class Follower:
 		self.Kd = 0.1
 		self.cx =0
 		self.cy = 0
-#		cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成
-#		cv.namedWindow('MASK', 1)   #'MASK'という名前の画像表示のウィンドウを作成
-#		cv.namedWindow('MASKED', 1) #'MASK'という名前の画像表示のウィンドウを作成
+                cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成
+                cv.namedWindow('MASK', 1)   #'MASK'という名前の画像表示のウィンドウを作成
+                cv.namedWindow('MASKED', 1) #'MASK'という名前の画像表示のウィンドウを作成
 		self.image_sub = rospy.Subscriber('/camera/color/image_raw', Image, self.image_callback)   #Image型で画像トピックを購読し，コールバック関数を呼ぶ
 		self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size = 1)
 		self.twist = Twist()    #Twistインスタンス生成
@@ -80,9 +80,9 @@ class Follower:
 
 		#表示
 		#print("表示")
-#		cv.imshow('BGR Image', display_image)   #'BGR Image'ウィンドウにimageを表示
-#		cv.imshow('MASK', display_mask)         #'MASK'ウィンドウにimageを表示
-#		cv.imshow('MASKED', display_masked)     #'MASKED'ウィンドウにimageを表示
+                cv.imshow('BGR Image', display_image)   #'BGR Image'ウィンドウにimageを表示
+                cv.imshow('MASK', display_mask)         #'MASK'ウィンドウにimageを表示
+                cv.imshow('MASKED', display_masked)     #'MASKED'ウィンドウにimageを表示
 		#cv.setMouseCallback("HSV", self.mouseEvent)
 		cv.waitKey(3)   #3秒待つ
 
@@ -99,7 +99,7 @@ class Follower:
 			
 # 			rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
 			self.twist.angular.z = self.M
-			self.cmd_vel_pub.publish(self.twist)
+#			self.cmd_vel_pub.publish(self.twist)
 		
 #Unnecessary but it will be  used in the future--------------
 
