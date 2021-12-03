@@ -35,7 +35,7 @@ class Follower:
 		self.Kd = 0.1
 		self.cx =0
 		self.cy = 0
-    cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成
+		cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成
 		cv.namedWindow('MASK', 1)   #'MASK'という名前の画像表示のウィンドウを作成
 		cv.namedWindow('MASKED', 1) #'MASK'という名前の画像表示のウィンドウを作成
 		self.image_sub = rospy.Subscriber('/camera/color/image_raw', Image, self.image_callback)   #Image型で画像トピックを購読し，コールバック関数を呼ぶ
@@ -52,25 +52,18 @@ class Follower:
 		image_hsv= cv2.cvtColor(image_src,cv2.COLOR_BGR2HSV)
 		cv2.imshow("hsv",image_hsv)
 		cv.waitKey(0)   #3秒待つ
-
-
-			
-			
-# 			rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
-			self.twist.angular.z = self.M
-#			self.cmd_vel_pub.publish(self.twist)
 		
 #Unnecessary but it will be  used in the future--------------
 
 	def mouseEvent(self,event,x,y,flags,param):
 		if event == cv.EVENT_LBUTTONUP:
-			  pixel= image_hsv[y,x]
-        #you might want to adjust the ranges(+-10, etc):
-        upper=  np.array([pixel[0] + 10, pixel[1] + 10, pixel[2] + 40])
-        lower=  np.array([pixel[0] -10, pixel[1] -10, pixel[2] -40])
-        print(pixel, lower, upper)
-        image_mask= cv2.inRange(image_hsv,lower,upper)
-        # cv2.imshow("mask",image_mask)
+			pixel= image_hsv[y,x]
+			#you might want to adjust the ranges(+-10, etc):
+			upper=  np.array([pixel[0] + 10, pixel[1] + 10, pixel[2] + 40])
+			lower=  np.array([pixel[0] -10, pixel[1] -10, pixel[2] -40])
+			print(pixel, lower, upper)
+			image_mask= cv2.inRange(image_hsv,lower,upper)
+			# cv2.imshow("mask",image_mask)
       
 
 	def setColorRange(self,index, x, y):
