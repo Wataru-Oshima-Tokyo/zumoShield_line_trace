@@ -55,7 +55,7 @@
           respawn="false" 
           output="screen" >
       <param name="image_transport" value="compressed" />
-      <remap from="/raspicam/image/compressed" to="/raspicam/image/raw" />           
+<!--       <remap from="/raspicam/image/compressed" to="/raspicam/image/raw" />            -->
     </node>
     
     
