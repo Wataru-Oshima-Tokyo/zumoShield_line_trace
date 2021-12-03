@@ -54,7 +54,7 @@
           type="republish" 
           respawn="false" 
           output="screen"
-          args="compressed in:=/raspicam_node/image raw out:=/raw" />
+          args="compressed in:=/raspicam_node/image raw out:=/raspicam_node/image/raw" />
 
     
     <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 map odom"/>
