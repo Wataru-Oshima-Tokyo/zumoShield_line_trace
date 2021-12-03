@@ -58,10 +58,10 @@ class Follower:
 		mask[0:search_top, 0:w] = 0
 		mask[search_bot:h, 0:w] = 0
 
-		self.M = cv.moments(mask)    #maskにおける1の部分の重心
-		if self.M['m00'] > 0:    #重心が存在する
-			cx = int(self.M['m10']/self.M['m00']) #重心のx座標
-			cy = int(self.M['m01']/self.M['m00']) #重心のy座標
+		cg = cv.moments(mask)    #maskにおける1の部分の重心
+		if cg['m00'] > 0:    #重心が存在する
+			cx = int(cg['m10']/cg['m00']) #重心のx座標
+			cy = int(cg['m01']/cg['m00']) #重心のy座標
 			cv.circle(image, (cx, cy), 20, (0, 0, 255), -1) #赤丸を画像に描画
 
 		err = cx - w//2 #黄色の先の重心座標(x)と画像の中心(x)との差
