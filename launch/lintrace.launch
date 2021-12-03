@@ -54,8 +54,7 @@
           type="republish" 
           respawn="false" 
           output="screen" >
-        <param name="~compressed in"         type="string"   value="/raspicam_node/image"/>
-        <param name="~raw out"         type="string"   value="/raw"/>
+          <args="compressed in:=/raspicam_node/image raw out:=/raw" />
     </node>
     
     
