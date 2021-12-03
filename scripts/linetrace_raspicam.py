@@ -97,7 +97,7 @@ class Follower:
 			
 			rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
 			self.twist.angular.z = self.M
-# 			self.cmd_vel_pub.publish(self.twist)
+ 			self.cmd_vel_pub.publish(self.twist)
 		
 #Unnecessary but it will be  used in the future--------------
 
