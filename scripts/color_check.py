@@ -6,41 +6,16 @@ from sensor_msgs.msg import Image
 import rospy
 import cv_bridge
 import numpy as np
-from geometry_msgs.msg import Twist
-
-"""
-#M : 与える操作量
-#M1 : 一つ前に与えた操作量
-#e : 偏差(目的値と現在値の差)
-#e1 : 前回の偏差
-#e2 : 前々回の偏差
-#Kp : 比例制御（P制御)の比例定数
-#Ki : 積分制御（I制御)の比例定数
-#Kd : 微分制御（D制御)の比例定数
-"""
-
 
 
 class Follower:
 	def __init__(self):
 		print("__init__")
 		self.bridge = cv_bridge.CvBridge()
-		self.M = 0.00
-		self.M1 =  0.00
-		self.e = 0.00
-		self.e1 = 0.00
-		self.e2 = 0.00
-		self.Kp = 0.1
-		self.Ki = 0.1
-		self.Kd = 0.1
-		self.cx =0
-		self.cy = 0
 		cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成
 		cv.namedWindow('MASK', 1)   #'MASK'という名前の画像表示のウィンドウを作成
 		cv.namedWindow('MASKED', 1) #'MASK'という名前の画像表示のウィンドウを作成
 		self.image_sub = rospy.Subscriber('/camera/color/image_raw', Image, self.image_callback)   #Image型で画像トピックを購読し，コールバック関数を呼ぶ
-		self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size = 1)
-		self.twist = Twist()    #Twistインスタンス生成
 		
 	def image_callback(self, msg):
 		#print("I will write down codes below")
