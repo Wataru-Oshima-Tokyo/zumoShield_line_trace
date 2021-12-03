@@ -54,8 +54,8 @@
           type="republish" 
           respawn="false" 
           output="screen" >
-      <param name="image_transport" value="compressed" />
-<!--       <remap from="/raspicam/image/compressed" to="/raspicam/image/raw" />            -->
+        <param name="~compressed in"         type="string"   value="/raspicam_node/image"/>
+        <param name="~raw out"         type="string"   value="/raspicam_node/image/raw"/>
     </node>
     
     
