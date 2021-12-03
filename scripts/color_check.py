@@ -35,15 +35,11 @@ class Follower:
 			#you might want to adjust the ranges(+-10, etc):
 			upper=  np.array([pixel[0] + 10, pixel[1] + 10, pixel[2] + 40])
 			lower=  np.array([pixel[0] -10, pixel[1] -10, pixel[2] -40])
-			rospy.loginfo("lower")
-			for i in lower:
-				rospy.loginfo(str(i))
-			rospy.loginfo("upper")
-			for i in upper:
-				rospy.loginfo(str(i))
-			print(pixel, lower, upper)
+
+			print("pixel: "+ str(pixel), "lower: "+ str(lower), "upper: " + str(upper))
 			image_mask= cv.inRange(image_hsv,lower,upper)
-			# cv.imshow("mask",image_mask)
+			cv.imshow("mask",image_mask)
+			cv.waitKey(3)
       
 
 	def setColorRange(self,index, x, y):
