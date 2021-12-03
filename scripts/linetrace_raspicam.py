@@ -91,7 +91,7 @@ class Follower:
 		for i in range(t):
 			self.M1 = self.M
 			self.e2 = self.e1
-			self.e1 = e
+			self.e1 = self.e
 			self.M =  self.M1 + self.Kp * (self.e-self.e1) + self.Ki * self.e + self.Kd * ((self.e-self.e1) - (self.e1-self.e2))
 
 			self.twist.linear.z = self.M
