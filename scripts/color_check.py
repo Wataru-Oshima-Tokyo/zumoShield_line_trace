@@ -22,7 +22,7 @@ class Follower:
 		image = self.bridge.imgmsg_to_cv2(msg, desired_encoding = 'bgr8')
 		hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV)  #色空間の変換(BGR→HSV)
 		cv.namedWindow('hsv')
-		cv.setMouseCallback('hsv', mouseEvent)
+		cv.setMouseCallback('hsv', self.mouseEvent)
 		# now click into the hsv img , and look at values:
 		image_hsv= cv.cvtColor(image_src,cv.COLOR_BGR2HSV)
 		cv.imshow("hsv",image_hsv)
