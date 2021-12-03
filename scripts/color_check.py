@@ -37,7 +37,7 @@ class Follower:
 			lower=  np.array([pixel[0] -10, pixel[1] -10, pixel[2] -40])
 
 			print("pixel: "+ str(pixel), "lower: "+ str(lower), "upper: " + str(upper))
-			image_mask= cv.inRange(image_hsv,lower,upper)
+			image_mask= cv.inRange(self.hsv,lower,upper)
 			cv.imshow("mask",image_mask)
 			cv.waitKey(3)
       
