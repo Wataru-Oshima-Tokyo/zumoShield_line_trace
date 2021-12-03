@@ -21,11 +21,11 @@ class Follower:
 		#print("I will write down codes below")
 		image = self.bridge.imgmsg_to_cv2(msg, desired_encoding = 'bgr8')
 		hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV)  #色空間の変換(BGR→HSV)
-		cv2.namedWindow('hsv')
-		cv2.setMouseCallback('hsv', pick_color)
+		cv.namedWindow('hsv')
+		cv.setMouseCallback('hsv', pick_color)
 		# now click into the hsv img , and look at values:
-		image_hsv= cv2.cvtColor(image_src,cv2.COLOR_BGR2HSV)
-		cv2.imshow("hsv",image_hsv)
+		image_hsv= cv.cvtColor(image_src,cv.COLOR_BGR2HSV)
+		cv.imshow("hsv",image_hsv)
 		cv.waitKey(0)   #3秒待つ
 		
 #Unnecessary but it will be  used in the future--------------
@@ -37,8 +37,8 @@ class Follower:
 			upper=  np.array([pixel[0] + 10, pixel[1] + 10, pixel[2] + 40])
 			lower=  np.array([pixel[0] -10, pixel[1] -10, pixel[2] -40])
 			print(pixel, lower, upper)
-			image_mask= cv2.inRange(image_hsv,lower,upper)
-			# cv2.imshow("mask",image_mask)
+			image_mask= cv.inRange(image_hsv,lower,upper)
+			# cv.imshow("mask",image_mask)
       
 
 	def setColorRange(self,index, x, y):
