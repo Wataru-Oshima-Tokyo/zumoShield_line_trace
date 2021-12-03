@@ -12,9 +12,9 @@ class Follower:
 	def __init__(self):
 		print("__init__")
 		self.bridge = cv_bridge.CvBridge()
-		cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成
-		cv.namedWindow('MASK', 1)   #'MASK'という名前の画像表示のウィンドウを作成
-		cv.namedWindow('MASKED', 1) #'MASK'という名前の画像表示のウィンドウを作成
+# 		cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成
+# 		cv.namedWindow('MASK', 1)   #'MASK'という名前の画像表示のウィンドウを作成
+# 		cv.namedWindow('MASKED', 1) #'MASK'という名前の画像表示のウィンドウを作成
 		self.image_sub = rospy.Subscriber('/camera/color/image_raw', Image, self.image_callback)   #Image型で画像トピックを購読し，コールバック関数を呼ぶ
 		
 	def image_callback(self, msg):
@@ -24,9 +24,8 @@ class Follower:
 		cv.namedWindow('hsv')
 		cv.setMouseCallback('hsv', self.mouseEvent)
 		# now click into the hsv img , and look at values:
-		image_hsv= cv.cvtColor(hsv,cv.COLOR_BGR2HSV)
-		cv.imshow("hsv",image_hsv)
-		cv.waitKey(0)   #3秒待つ
+		cv.imshow("hsv",hsv)
+		cv.waitKey(0) 
 		
 #Unnecessary but it will be  used in the future--------------
 
