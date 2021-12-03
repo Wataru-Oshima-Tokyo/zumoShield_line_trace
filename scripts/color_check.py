@@ -25,6 +25,7 @@ class Follower:
 		cv.setMouseCallback('hsv', self.mouseEvent)
 		# now click into the hsv img , and look at values:
 		cv.imshow("hsv",self.hsv)
+		cv.waitKey(3)
 		
 #Unnecessary but it will be  used in the future--------------
 
