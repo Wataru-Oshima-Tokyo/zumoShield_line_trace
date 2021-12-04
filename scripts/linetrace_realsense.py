@@ -35,6 +35,7 @@ class Follower:
 		self.Kd = 0.1
 		self.cx =0
 		self.cy = 0
+		self.count =100
 		self.first = True
 #                 cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成
 #                 cv.namedWindow('MASK', 1)   #'MASK'という名前の画像表示のウィンドウを作成
@@ -73,11 +74,14 @@ class Follower:
 			self.twist.angular.z = self.M
 			rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
 			self.cmd_vel_pub.publish(self.twist)
+			self.count = 100
 	# 		self.PIDcontrol(err)
 		else:
-			self.twist.linear.x = 0.0
-			self.twist.angular.z = 1.0
-			self.cmd_vel_pub.publish(self.twist)
+			self.count -=1
+			if(self.count <0):
+				self.twist.linear.x = 0.0
+				self.twist.angular.z = 0.5
+				self.cmd_vel_pub.publish(self.twist)
 		#大きすぎるため，サイズ調整
 		#print("大きすぎるため，サイズ調整")
 # 		display_mask = cv.resize(mask, RESIZE)
