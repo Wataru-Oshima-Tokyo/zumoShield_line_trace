@@ -76,7 +76,7 @@ class Follower:
 	# 		self.PIDcontrol(err)
 		else:
 			self.twist.linear.x = 0.0
-			self.twist.angular.z = 0.2
+			self.twist.angular.z = 1.0
 			self.cmd_vel_pub.publish(self.twist)
 		#大きすぎるため，サイズ調整
 		#print("大きすぎるため，サイズ調整")
