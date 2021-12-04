@@ -74,7 +74,10 @@ class Follower:
 			rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
 			self.cmd_vel_pub.publish(self.twist)
 	# 		self.PIDcontrol(err)
-
+		else:
+			self.twist.linear.x = 0.0
+			self.twist.angular.z = 0.2
+			self.cmd_vel_pub.publish(self.twist)
 		#大きすぎるため，サイズ調整
 		#print("大きすぎるため，サイズ調整")
 # 		display_mask = cv.resize(mask, RESIZE)
