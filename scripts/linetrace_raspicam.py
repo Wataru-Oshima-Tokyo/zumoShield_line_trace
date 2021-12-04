@@ -33,6 +33,8 @@ class Follower:
 		self.Kp = 0.1
 		self.Ki = 0.1
 		self.Kd = 0.1
+		self.cx = 0
+		self.cy = 0
 #		cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成
 #		cv.namedWindow('MASK', 1)   #'MASK'という名前の画像表示のウィンドウを作成
 #		cv.namedWindow('MASKED', 1) #'MASK'という名前の画像表示のウィンドウを作成
@@ -60,9 +62,9 @@ class Follower:
 
 		cg = cv.moments(mask)    #maskにおける1の部分の重心
 		if cg['m00'] > 0:    #重心が存在する
-			cx = int(cg['m10']/cg['m00']) #重心のx座標
-			cy = int(cg['m01']/cg['m00']) #重心のy座標
-			cv.circle(image, (cx, cy), 20, (0, 0, 255), -1) #赤丸を画像に描画
+			self.cx = int(cg['m10']/cg['m00']) #重心のx座標
+			self.cy = int(cg['m01']/cg['m00']) #重心のy座標
+			cv.circle(image, (self.cx, self.cy), 20, (0, 0, 255), -1) #赤丸を画像に描画
 
 		err = cx - w//2 #黄色の先の重心座標(x)と画像の中心(x)との差
 		self.twist.linear.x = 0.2
