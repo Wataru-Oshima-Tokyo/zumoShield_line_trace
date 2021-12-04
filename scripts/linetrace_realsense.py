@@ -67,13 +67,13 @@ class Follower:
 			self.cy = int(cg['m01']/cg['m00']) #重心のy座標
 			cv.circle(image, (self.cx, self.cy), 20, (0, 0, 255), -1) #赤丸を画像に描画
 
-		err = self.cx - w//2 #黄色の先の重心座標(x)と画像の中心(x)との差
-		self.twist.linear.x = 0.2
-		self.M = -float(err)/200 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
-		self.twist.angular.z = self.M
-		rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
-		self.cmd_vel_pub.publish(self.twist)
-# 		self.PIDcontrol(err)
+			err = self.cx - w//2 #黄色の先の重心座標(x)と画像の中心(x)との差
+			self.twist.linear.x = 0.2
+			self.M = -float(err)/200 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
+			self.twist.angular.z = self.M
+			rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
+			self.cmd_vel_pub.publish(self.twist)
+	# 		self.PIDcontrol(err)
 
 		#大きすぎるため，サイズ調整
 		#print("大きすぎるため，サイズ調整")
