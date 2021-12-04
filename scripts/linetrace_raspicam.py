@@ -46,8 +46,8 @@ class Follower:
 		#print("I will write down codes below")
 		image = self.bridge.imgmsg_to_cv2(msg, desired_encoding = 'bgr8')
 		hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV)  #色空間の変換(BGR→HSV)
-		lower_black = np.array([17, 164, 203])       #黄色の閾値（下限）
-		upper_black = np.array([37, 184, 183])    #黄色の閾値（上限）
+		lower_black = np.array([5, 89, 167])       #黄色の閾値（下限）
+		upper_black = np.array([37, 109, 247])    #黄色の閾値（上限）
 		mask = cv.inRange(hsv, lower_black, upper_black)  #閾値によるHSV画像の2値化（マスク画像生成）
 		masked = cv.bitwise_and(image, image, mask = mask)  #mask画像において，1である部分だけが残る（フィルタに通している）
 
