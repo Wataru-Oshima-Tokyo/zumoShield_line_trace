@@ -77,7 +77,7 @@ class Follower:
 			self.count = 100
 	# 		self.PIDcontrol(err)
 		else:
-			self.count -=1
+			self.count -=10
 			if(self.count <0):
 				self.twist.linear.x = 0.0
 				self.twist.angular.z = 0.5
