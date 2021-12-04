@@ -11,7 +11,7 @@
 
     <node name="color_check"
           pkg="zumoShield_line_trace"
-          type="color_check.py"
+          type="color_check_p3.py"
           respawn="false"
           output="screen" />
 </launch>
