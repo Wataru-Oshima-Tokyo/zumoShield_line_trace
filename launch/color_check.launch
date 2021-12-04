@@ -7,7 +7,7 @@
           type="republish" 
           respawn="false" 
           output="screen"
-          args="compressed in:=/raspicam_node/image raw out:=/raspicam_node/image/raw" />
+          args="compressed in:=/raspicam_node/image raw out:=/camera/color/image_raw" />
 
     <node name="color_check"
           pkg="zumoShield_line_trace"
