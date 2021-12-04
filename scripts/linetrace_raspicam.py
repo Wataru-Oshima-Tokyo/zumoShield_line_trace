@@ -66,11 +66,11 @@ class Follower:
 			self.cy = int(cg['m01']/cg['m00']) #重心のy座標
 			cv.circle(image, (self.cx, self.cy), 20, (0, 0, 255), -1) #赤丸を画像に描画
 
-		err = self.cx - w//2 #黄色の先の重心座標(x)と画像の中心(x)との差
-# 		self.twist.linear.x = 0.2
-#  		self.twist.angular.z = -float(err)/2000 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
-		#self.cmd_vel_pub.publish(self.twist)
-		self.PIDcontrol(err)
+			err = self.cx - w//2 #黄色の先の重心座標(x)と画像の中心(x)との差
+	# 		self.twist.linear.x = 0.2
+	#  		self.twist.angular.z = -float(err)/2000 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
+			#self.cmd_vel_pub.publish(self.twist)
+			self.PIDcontrol(err)
 
 		#大きすぎるため，サイズ調整
 		#print("大きすぎるため，サイズ調整")
@@ -90,13 +90,11 @@ class Follower:
 	def PIDcontrol(self, goal):
 		t = 100
 		self.twist.linear.x = 0.2
-		y_list =[]
-		y_list.append(0.00)
 		for i in range(t):
 			self.M1 = self.M
 			self.e2 = self.e1
 			self.e1 = self.e
-			self.e = goal - y_list[i] #偏差（e） = 目的値（goal） - 前回の操作量
+			self.e = goal - self.M #偏差（e） = 目的値（goal） - 前回の操作量
 			self.M =  self.M1 + self.Kp * (self.e-self.e1) + self.Ki * self.e + self.Kd * ((self.e-self.e1) - (self.e1-self.e2))
 			y_list.append(self.M)
 			
