@@ -67,8 +67,8 @@ class Follower:
 			cv.circle(image, (self.cx, self.cy), 20, (0, 0, 255), -1) #赤丸を画像に描画
 
 		err = self.cx - w//2 #黄色の先の重心座標(x)と画像の中心(x)との差
-		self.twist.linear.x = 0.2
-		self.twist.angular.z = -float(err)/2000 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
+# 		self.twist.linear.x = 0.2
+#  		self.twist.angular.z = -float(err)/2000 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
 		#self.cmd_vel_pub.publish(self.twist)
 		self.PIDcontrol(err)
 
@@ -94,6 +94,7 @@ class Follower:
 			self.M1 = self.M
 			self.e2 = self.e1
 			self.e1 = self.e
+			self.e = goal - self.M #偏差（e） = 目的値（goal） - 前回の操作量
 			self.M =  self.M1 + self.Kp * (self.e-self.e1) + self.Ki * self.e + self.Kd * ((self.e-self.e1) - (self.e1-self.e2))
 			
 			
