@@ -98,15 +98,12 @@ class Follower:
 
 
 	def PIDcontrol(self, goal):
-		t = 100
 		self.twist.linear.x = 0.2
-		for i in range(t):
-			self.M1 = self.M
-			self.e2 = self.e1
-			self.e1 = self.e
-			self.e = goal - self.M #偏差（e） = 目的値（goal） - 前回の操作量
-			self.M =  self.M1 + self.Kp * (self.e-self.e1) + self.Ki * self.e + self.Kd * ((self.e-self.e1) - (self.e1-self.e2))
-			
+		self.M1 = self.M
+		self.e2 = self.e1
+		self.e1 = self.e
+		self.e = goal - self.M #偏差（e） = 目的値（goal） - 前回の操作量
+		self.M =  self.M1 + self.Kp * (self.e-self.e1) + self.Ki * self.e + self.Kd * ((self.e-self.e1) - (self.e1-self.e2))	
 		rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
 		self.twist.angular.z = self.M*0.001
 		self.cmd_vel_pub.publish(self.twist)
