@@ -69,7 +69,7 @@ class Follower:
 
 		err = self.cx - w//2 #黄色の先の重心座標(x)と画像の中心(x)との差
 # 		self.twist.linear.x = 0.2
-		self.M = -float(err)/2000 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
+# 		self.M = -float(err)/2000 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
 # 		self.cmd_vel_pub.publish(self.twist)
 		self.PIDcontrol(err)
 
