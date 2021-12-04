@@ -90,6 +90,7 @@ class Follower:
 	def PIDcontrol(self, goal):
 		t = 100
 		self.twist.linear.x = 0.2
+		y_list =[]
 		y_list.append(0.00)
 		for i in range(t):
 			self.M1 = self.M
