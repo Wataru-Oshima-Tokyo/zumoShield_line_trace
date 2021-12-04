@@ -96,7 +96,6 @@ class Follower:
 			self.e1 = self.e
 			self.e = goal - self.M #偏差（e） = 目的値（goal） - 前回の操作量
 			self.M =  self.M1 + self.Kp * (self.e-self.e1) + self.Ki * self.e + self.Kd * ((self.e-self.e1) - (self.e1-self.e2))
-			y_list.append(self.M)
 			
 		rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
 		self.twist.angular.z = self.M
