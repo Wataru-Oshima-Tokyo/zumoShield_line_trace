@@ -12,7 +12,7 @@ class Follower:
 	def __init__(self):
 		print("__init__")
 		self.bridge = cv_bridge.CvBridge()
-# 		cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成
+# 		cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成a
 # 		cv.namedWindow('MASK', 1)   #'MASK'という名前の画像表示のウィンドウを作成
 # 		cv.namedWindow('MASKED', 1) #'MASK'という名前の画像表示のウィンドウを作成
  		self.image_sub = rospy.Subscriber('/camera/color/image_raw', Image, self.image_callback)   #Image型で画像トピックを購読し，コールバック関数を呼ぶ
