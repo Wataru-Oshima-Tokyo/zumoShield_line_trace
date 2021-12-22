@@ -57,8 +57,8 @@ class Follower:
 
 		h, w = image.shape[:2]
 		RESIZE = (w//3, h//3)
-		search_top = (h//4)*3
-		search_bot = search_top + 10    #目の前の線にだけに興味がある→20行分くらいに絞る
+		search_top = (h//4)*2
+		search_bot = search_top + 20    #目の前の線にだけに興味がある→20行分くらいに絞る
 		mask[0:search_top, 0:w] = 0
 		mask[search_bot:h, 0:w] = 0
 
