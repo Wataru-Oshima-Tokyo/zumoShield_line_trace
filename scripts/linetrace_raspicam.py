@@ -85,25 +85,6 @@ class Follower:
 		display_mask = cv.resize(mask, RESIZE)
 		display_masked = cv.resize(masked, RESIZE)
 		display_image = cv.resize(image, RESIZE)
-=======
-			self.M = -float(err)/200 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
-			self.twist.angular.z = self.M
-			rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
-			self.cmd_vel_pub.publish(self.twist)
-			self.count = 100
-	# 		self.PIDcontrol(err)
-		else:
-			self.count -=10
-			if(self.count <0):
-				self.twist.linear.x = 0.0
-				self.twist.angular.z = 0.5
-				self.cmd_vel_pub.publish(self.twist)
-		#大きすぎるため，サイズ調整
-		#print("大きすぎるため，サイズ調整")
-# 		display_mask = cv.resize(mask, RESIZE)
-# 		display_masked = cv.resize(masked, RESIZE)
-# 		display_image = cv.resize(image, RESIZE)
-
 
 		#表示
 		#print("表示")
