@@ -59,7 +59,7 @@ class Follower:
 		search_bot = search_top + 20    #目の前の線にだけに興味がある→20行分くらいに絞る
 		mask[0:search_top, 0:w] = 0
 		mask[search_bot:h, 0:w] = 0
-
+		cg = cv.moments(mask)    #maskにおける1の部分の重心
 		if cg['m00'] > 0:    #重心が存在する
 			self.cx = int(cg['m10']/cg['m00']) #重心のx座標
 			self.cy = int(cg['m01']/cg['m00']) #重心のy座標
