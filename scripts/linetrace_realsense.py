@@ -85,8 +85,8 @@ class Follower:
 		#大きすぎるため，サイズ調整
 		#print("大きすぎるため，サイズ調整")
  		display_mask = cv.resize(mask, RESIZE)
-# 		display_masked = cv.resize(masked, RESIZE)
-# 		display_image = cv.resize(image, RESIZE)
+ 		display_masked = cv.resize(masked, RESIZE)
+ 		display_image = cv.resize(image, RESIZE)
 
 		#表示
 		#print("表示")
