@@ -67,13 +67,18 @@ class Follower:
 
 			err = self.cx - w//2 #黄色の先の重心座標(x)と画像の中心(x)との差
 			self.twist.linear.x = 0.2
-<<<<<<< HEAD
-			self.twist.angular.z = -float(err)/2000 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
-			#self.cmd_vel_pub.publish(self.twist)
+			self.M = -float(err)/200 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
+			self.twist.angular.z = self.M
+			rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
+			self.cmd_vel_pub.publish(self.twist)
+			self.count = 100
 			#self.PIDcontrol(err)
 		else:
-                    self.twist.linear.x = 0.0
-                    self.twist.angular.z = 0.0
+			self.count -=10
+			if(self.count <0):
+				self.twist.linear.x = 0.0
+				self.twist.angular.z = 0.5
+				self.cmd_vel_pub.publish(self.twist)
                     #大きすぎるため，サイズ調整
 		#print("大きすぎるため，サイズ調整")
 		self.cmd_vel_pub.publish(self.twist)
@@ -98,7 +103,7 @@ class Follower:
 # 		display_mask = cv.resize(mask, RESIZE)
 # 		display_masked = cv.resize(masked, RESIZE)
 # 		display_image = cv.resize(image, RESIZE)
->>>>>>> 9d5a9e72eeef74d7b5ef8e92257862c829db88eb
+
 
 		#表示
 		#print("表示")
