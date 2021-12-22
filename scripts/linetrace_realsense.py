@@ -84,14 +84,14 @@ class Follower:
 				self.cmd_vel_pub.publish(self.twist)
 		#大きすぎるため，サイズ調整
 		#print("大きすぎるため，サイズ調整")
-# 		display_mask = cv.resize(mask, RESIZE)
+ 		display_mask = cv.resize(mask, RESIZE)
 # 		display_masked = cv.resize(masked, RESIZE)
 # 		display_image = cv.resize(image, RESIZE)
 
 		#表示
 		#print("表示")
 #                 cv.imshow('BGR Image', display_image)   #'BGR Image'ウィンドウにimageを表示
-#                 cv.imshow('MASK', display_mask)         #'MASK'ウィンドウにimageを表示
+		cv.imshow('MASK', display_mask)         #'MASK'ウィンドウにimageを表示
 #                 cv.imshow('MASKED', display_masked)     #'MASKED'ウィンドウにimageを表示
 		#cv.setMouseCallback("HSV", self.mouseEvent)
 		cv.waitKey(3)   #3秒待つ
