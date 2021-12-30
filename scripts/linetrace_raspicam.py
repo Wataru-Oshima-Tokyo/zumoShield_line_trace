@@ -82,7 +82,7 @@ class Follower:
 				self.cmd_vel_pub.publish(self.twist)
                     #大きすぎるため，サイズ調整
 		#print("大きすぎるため，サイズ調整")
-		self.cmd_vel_pub.publish(self.twist)
+		#self.cmd_vel_pub.publish(self.twist)
 		display_mask = cv.resize(mask, RESIZE)
 		display_masked = cv.resize(masked, RESIZE)
 		display_image = cv.resize(image, RESIZE)
