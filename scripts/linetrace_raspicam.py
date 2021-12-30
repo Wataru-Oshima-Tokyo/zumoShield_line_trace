@@ -74,14 +74,14 @@ class Follower:
 			self.cmd_vel_pub.publish(self.twist)
 			self.count = 100
 			#self.PIDcontrol(err)
-		"""
+		
 		else:
 			self.count -=10
 			if(self.count <0):
-				self.twist.linear.x = 0.0
-				self.twist.angular.z = 0.5
+				self.twist.linear.x = -0.1
+				self.twist.angular.z = 0.0
 				self.cmd_vel_pub.publish(self.twist)
-		"""
+		
                     #大きすぎるため，サイズ調整
 		#print("大きすぎるため，サイズ調整")
 		#self.cmd_vel_pub.publish(self.twist)
