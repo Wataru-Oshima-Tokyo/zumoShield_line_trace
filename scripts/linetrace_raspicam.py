@@ -80,7 +80,7 @@ class Follower:
 			self.count -=10
 			if(self.count <0):
 				if(self.count <-100):
-					rospy.on_shutdown(self.myhook)
+					rospy.signal_shutdown("shut down!")
 				self.twist.linear.x = -0.2
 				self.twist.angular.z = 1.5
 				self.cmd_vel_pub.publish(self.twist)
