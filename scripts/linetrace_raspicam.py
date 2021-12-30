@@ -42,7 +42,8 @@ class Follower:
 		self.image_sub = rospy.Subscriber('/camera/color/image_raw', Image, self.image_callback)   #Image型で画像トピックを購読し，コールバック関数を呼ぶ
 		self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size = 1)
 		self.twist = Twist()    #Twistインスタンス生成
-		
+	def myhook(self):
+		print("shut down")
 	def image_callback(self, msg):
 		#print("I will write down codes below")
 		image = self.bridge.imgmsg_to_cv2(msg, desired_encoding = 'bgr8')
@@ -78,6 +79,8 @@ class Follower:
 		else:
 			self.count -=10
 			if(self.count <0):
+				if(self.count <-100):
+					rospy.on_shutdown(self.myhook)
 				self.twist.linear.x = -0.2
 				self.twist.angular.z = 1.5
 				self.cmd_vel_pub.publish(self.twist)
