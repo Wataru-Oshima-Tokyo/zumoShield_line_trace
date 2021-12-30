@@ -78,7 +78,7 @@ class Follower:
 		else:
 			self.count -=10
 			if(self.count <0):
-				self.twist.linear.x = -0.1
+				self.twist.linear.x = -0.2
 				self.twist.angular.z = 1.5
 				self.cmd_vel_pub.publish(self.twist)
 		
