@@ -35,6 +35,7 @@ class Follower:
 		self.Kd = 0.1
 		self.cx = 0
 		self.cy = 0
+		self.count = 100
 		#cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成
 		#cv.namedWindow('MASK', 1)   #'MASK'という名前の画像表示のウィンドウを作成
 		#cv.namedWindow('MASKED', 1) #'MASK'という名前の画像表示のウィンドウを作成
