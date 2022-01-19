@@ -1,6 +1,6 @@
 <launch>
     
-    <include file="$(find raspicam_node)/launch/camerav2_1280x960.launch"></include>
+    <include file="$(find raspicam_node)/launch/camerav2_410x308_30fps.launch"></include>
     
     <node name="image_transport" 
           pkg="image_transport" 
