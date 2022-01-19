@@ -44,6 +44,7 @@ class Follower:
 		#cv.namedWindow('MASK', 1)   #'MASK'という名前の画像表示のウィンドウを作成
 		#cv.namedWindow('MASKED', 1) #'MASK'という名前の画像表示のウィンドウを作成
 		self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size = 1)
+		self.image_sub = rospy.Subscriber('/camera/color/image_raw', Image, self.image_callback)   #Image型で画像トピックを購読し，コールバック関数を呼ぶ
 		self.start_srv_ = rospy.Service('/line_trace/start', Empty, self.clbk_start_service)
 		self.stop_srv_ = rospy.Service('/line_trace/stop', Empty, self.clbk_stop_service)
 		rate = rospy.Rate(self.hz)
@@ -52,7 +53,7 @@ class Follower:
 			self.twist = Twist()    #Twistインスタンス生成
 			if self.RUN == 1:
 				#print("run")
-				self.image_sub = rospy.Subscriber('/camera/color/image_raw', Image, self.image_callback)   #Image型で画像トピックを購読し，コールバック関数を呼ぶ
+				self.move()
 				rate.sleep()
 
 	
@@ -66,7 +67,11 @@ class Follower:
 		print("stop line_trace follow")
 		self.RUN = 0
 		return EmptyResponse()
-	
+
+	def move(self):
+		self.cmd_vel_pub.publish(self.twist)
+		rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
+
 	def image_callback(self, msg):
 		#print("I will write down codes below")
 		image = self.bridge.imgmsg_to_cv2(msg, desired_encoding = 'bgr8')
@@ -94,7 +99,6 @@ class Follower:
 			self.twist.linear.x = 0.25
 			self.M = -float(err)/200 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
 			self.twist.angular.z = self.M
-			self.cmd_vel_pub.publish(self.twist)
 			self.count = 100
 			#self.PIDcontrol(err)
 		
@@ -103,8 +107,6 @@ class Follower:
 			if(self.count <0):
 				self.twist.linear.x = -0.2
 				self.twist.angular.z = 0.0
-				self.cmd_vel_pub.publish(self.twist)
-		rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
                     #大きすぎるため，サイズ調整
 		#print("大きすぎるため，サイズ調整")
 		#self.cmd_vel_pub.publish(self.twist)
