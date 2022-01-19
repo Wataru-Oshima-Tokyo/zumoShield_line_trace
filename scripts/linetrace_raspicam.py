@@ -70,7 +70,6 @@ class Follower:
 			self.twist.linear.x = 0.25
 			self.M = -float(err)/200 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
 			self.twist.angular.z = self.M
-			rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
 			self.cmd_vel_pub.publish(self.twist)
 			self.count = 100
 			#self.PIDcontrol(err)
@@ -81,7 +80,7 @@ class Follower:
 				self.twist.linear.x = -0.2
 				self.twist.angular.z = 1.5
 				self.cmd_vel_pub.publish(self.twist)
-		
+		rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
                     #大きすぎるため，サイズ調整
 		#print("大きすぎるため，サイズ調整")
 		#self.cmd_vel_pub.publish(self.twist)
