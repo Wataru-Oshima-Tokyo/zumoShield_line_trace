@@ -108,7 +108,8 @@ class Follower:
 				if self.RUN==1:
 					self.cmd_vel_pub.publish(self.twist)
                     #大きすぎるため，サイズ調整
-		rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
+		if self.RUN==1:
+			rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
 		#print("大きすぎるため，サイズ調整")
 		#self.cmd_vel_pub.publish(self.twist)
 		display_mask = cv.resize(mask, RESIZE)
