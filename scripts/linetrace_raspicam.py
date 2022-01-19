@@ -39,6 +39,7 @@ class Follower:
 		self.cy = 0
 		self.hz = 20
 		self.count = 100
+		self.RUN = 0
 		#cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成
 		#cv.namedWindow('MASK', 1)   #'MASK'という名前の画像表示のウィンドウを作成
 		#cv.namedWindow('MASKED', 1) #'MASK'という名前の画像表示のウィンドウを作成
