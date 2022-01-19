@@ -48,14 +48,8 @@ class Follower:
 		self.start_srv_ = rospy.Service('/line_trace/start', Empty, self.clbk_start_service)
 		self.stop_srv_ = rospy.Service('/line_trace/stop', Empty, self.clbk_stop_service)
 		rate = rospy.Rate(self.hz)
+		self.twist = Twist()    #Twistインスタンス生成
 		
-		while not rospy.is_shutdown():
-			self.twist = Twist()    #Twistインスタンス生成
-			
-				#print("run")
-				self.move()
-				rate.sleep()
-
 	
 	def clbk_start_service(self,req):
 		print("start line_trace follow")
