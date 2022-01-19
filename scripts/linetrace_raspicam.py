@@ -42,8 +42,7 @@ class Follower:
 		self.image_sub = rospy.Subscriber('/camera/color/image_raw', Image, self.image_callback)   #Image型で画像トピックを購読し，コールバック関数を呼ぶ
 		self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size = 1)
 		self.twist = Twist()    #Twistインスタンス生成
-	def myhook(self):
-		print("shut down")
+
 	def image_callback(self, msg):
 		#print("I will write down codes below")
 		image = self.bridge.imgmsg_to_cv2(msg, desired_encoding = 'bgr8')
@@ -94,11 +93,11 @@ class Follower:
 
 		#表示
 		#print("表示")
-                #cv.imshow('BGR Image', display_image)   #'BGR Image'ウィンドウにimageを表示
+		cv.imshow('BGR Image', display_image)   #'BGR Image'ウィンドウにimageを表示
 #                 cv.imshow('MASK', display_mask)         #'MASK'ウィンドウにimageを表示
 #                 cv.imshow('MASKED', display_masked)     #'MASKED'ウィンドウにimageを表示
 		#cv.setMouseCallback("HSV", self.mouseEvent)
-	      	cv.waitKey(3)   #3秒待つ
+		cv.waitKey(3)   #3秒待つ
 
 
 	def PIDcontrol(self, goal):
