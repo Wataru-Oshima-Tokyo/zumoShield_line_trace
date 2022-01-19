@@ -78,7 +78,7 @@ class Follower:
 			self.count -=10
 			if(self.count <0):
 				self.twist.linear.x = -0.2
-				self.twist.angular.z = 0.5
+				self.twist.angular.z = 0.0
 				self.cmd_vel_pub.publish(self.twist)
 		rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
                     #大きすぎるため，サイズ調整
