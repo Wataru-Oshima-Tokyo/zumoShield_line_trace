@@ -92,7 +92,7 @@ class Follower:
 		#表示
 		#print("表示")
 		cv.imshow('BGR Image', display_image)   #'BGR Image'ウィンドウにimageを表示
-		cv.imshow('MASK', display_mask)         #'MASK'ウィンドウにimageを表示
+		#cv.imshow('MASK', display_mask)         #'MASK'ウィンドウにimageを表示
 #                 cv.imshow('MASKED', display_masked)     #'MASKED'ウィンドウにimageを表示
 		#cv.setMouseCallback("HSV", self.mouseEvent)
 		cv.waitKey(3)   #3秒待つ
