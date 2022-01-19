@@ -7,6 +7,8 @@ import rospy
 import cv_bridge
 import numpy as np
 from geometry_msgs.msg import Twist
+from std_srvs.srv import Empty
+from std_srvs.srv import EmptyResponse
 
 """
 #M : 与える操作量
@@ -35,14 +37,35 @@ class Follower:
 		self.Kd = 0.1
 		self.cx = 0
 		self.cy = 0
+		self.hz = 20
 		self.count = 100
 		#cv.namedWindow('BGR Image', 1)  #'BGR Image'という名前の画像表示のウィンドウを作成
 		#cv.namedWindow('MASK', 1)   #'MASK'という名前の画像表示のウィンドウを作成
 		#cv.namedWindow('MASKED', 1) #'MASK'という名前の画像表示のウィンドウを作成
-		self.image_sub = rospy.Subscriber('/camera/color/image_raw', Image, self.image_callback)   #Image型で画像トピックを購読し，コールバック関数を呼ぶ
 		self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size = 1)
-		self.twist = Twist()    #Twistインスタンス生成
+		self.start_srv_ = rospy.Service('/line_trace/start', Empty, self.clbk_start_service)
+        	self.stop_srv_ = rospy.Service('/line_trace/stop', Empty, self.clbk_stop_service)
+		rate = rospy.Rate(self.hz)
+		
+		while not rospy.is_shutdown():
+			self.twist = Twist()    #Twistインスタンス生成
+			if self.RUN == 1:
+				#print("run")
+				self.image_sub = rospy.Subscriber('/camera/color/image_raw', Image, self.image_callback)   #Image型で画像トピックを購読し，コールバック関数を呼ぶ
+				rate.sleep()
 
+	
+	def clbk_start_service(self,req):
+		print("start line_trace follow")
+		self.RUN = 1
+		return EmptyResponse()
+
+
+	def clbk_stop_service(self,req):
+		print("stop line_trace follow")
+		self.RUN = 0
+		return EmptyResponse()
+	
 	def image_callback(self, msg):
 		#print("I will write down codes below")
 		image = self.bridge.imgmsg_to_cv2(msg, desired_encoding = 'bgr8')
