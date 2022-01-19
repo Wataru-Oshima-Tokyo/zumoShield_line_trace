@@ -78,8 +78,6 @@ class Follower:
 		else:
 			self.count -=10
 			if(self.count <0):
-				if(self.count <-400):
-					rospy.signal_shutdown("shut down!")
 				self.twist.linear.x = -0.2
 				self.twist.angular.z = 1.5
 				self.cmd_vel_pub.publish(self.twist)
@@ -93,8 +91,8 @@ class Follower:
 
 		#表示
 		#print("表示")
-		#cv.imshow('BGR Image', display_image)   #'BGR Image'ウィンドウにimageを表示
-		cv.imshow('MASK', self.hsv)         #'MASK'ウィンドウにimageを表示
+		cv.imshow('BGR Image', display_image)   #'BGR Image'ウィンドウにimageを表示
+		cv.imshow('MASK', display_mask)         #'MASK'ウィンドウにimageを表示
 #                 cv.imshow('MASKED', display_masked)     #'MASKED'ウィンドウにimageを表示
 		#cv.setMouseCallback("HSV", self.mouseEvent)
 		cv.waitKey(3)   #3秒待つ
