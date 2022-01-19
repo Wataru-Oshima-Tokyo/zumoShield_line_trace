@@ -51,7 +51,7 @@ class Follower:
 		
 		while not rospy.is_shutdown():
 			self.twist = Twist()    #Twistインスタンス生成
-			if self.RUN == 1:
+			
 				#print("run")
 				self.move()
 				rate.sleep()
@@ -66,11 +66,7 @@ class Follower:
 	def clbk_stop_service(self,req):
 		print("stop line_trace follow")
 		self.RUN = 0
-		return EmptyResponse()
-
-	def move(self):
-		self.cmd_vel_pub.publish(self.twist)
-		rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
+		return EmptyResponse()		
 
 	def image_callback(self, msg):
 		#print("I will write down codes below")
@@ -99,6 +95,8 @@ class Follower:
 			self.twist.linear.x = 0.25
 			self.M = -float(err)/200 #誤差にあわせて回転速度を変化させる（-1/1000がP制御でいうところの比例ゲインにあたる）
 			self.twist.angular.z = self.M
+			if self.RUN == 1:
+				self.cmd_vel_pub.publish(self.twist)
 			self.count = 100
 			#self.PIDcontrol(err)
 		
@@ -107,7 +105,10 @@ class Follower:
 			if(self.count <0):
 				self.twist.linear.x = -0.2
 				self.twist.angular.z = 0.0
+				if self.RUN==1:
+					self.cmd_vel_pub.publish(self.twist)
                     #大きすぎるため，サイズ調整
+		rospy.loginfo("Linear: " + str(self.twist.linear.x) + " Angular " + str(self.twist.angular.z))
 		#print("大きすぎるため，サイズ調整")
 		#self.cmd_vel_pub.publish(self.twist)
 		display_mask = cv.resize(mask, RESIZE)
