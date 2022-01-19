@@ -94,7 +94,7 @@ class Follower:
 		#cv.imshow('MASK', display_mask)         #'MASK'ウィンドウにimageを表示
 #                 cv.imshow('MASKED', display_masked)     #'MASKED'ウィンドウにimageを表示
 		#cv.setMouseCallback("HSV", self.mouseEvent)
-		cv.waitKey(3)   #3秒待つ
+		cv.waitKey(100)   #3秒待つ
 
 
 	def PIDcontrol(self, goal):
