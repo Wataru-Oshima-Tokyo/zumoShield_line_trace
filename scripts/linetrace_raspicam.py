@@ -44,7 +44,7 @@ class Follower:
 		#cv.namedWindow('MASKED', 1) #'MASK'という名前の画像表示のウィンドウを作成
 		self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size = 1)
 		self.start_srv_ = rospy.Service('/line_trace/start', Empty, self.clbk_start_service)
-        	self.stop_srv_ = rospy.Service('/line_trace/stop', Empty, self.clbk_stop_service)
+		self.stop_srv_ = rospy.Service('/line_trace/stop', Empty, self.clbk_stop_service)
 		rate = rospy.Rate(self.hz)
 		
 		while not rospy.is_shutdown():
@@ -136,4 +136,3 @@ if __name__=="__main__":
 	rospy.init_node('follower')
 	follower = Follower()
 	rospy.spin()
-
