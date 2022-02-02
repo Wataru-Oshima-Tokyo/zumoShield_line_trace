@@ -28,6 +28,16 @@ class Follower:
 		masked = cv.bitwise_and(image, image, mask = mask)  #mask画像において，1である部分だけが残る（フィルタに通している）
 
 
+		
+#--------------------------------------------------
+
+if __name__=="__main__":
+	print("Start")
+	rospy.init_node('follower')
+	follower = Follower()
+#	follower.setOpenCVParams()
+	rospy.spin()		
+
 
 		h, w = image.shape[:2]
 		RESIZE = (w//3, h//3)
